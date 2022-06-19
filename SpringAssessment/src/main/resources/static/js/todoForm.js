@@ -20,7 +20,17 @@ newItemForm.addEventListener('submit', (event) => {
     newItemDescription.value = '';
     newItemTargetDate.value = '';
 
+    const payload = JSON.stringify({
+        title: title,
+        description: description,
+        targetDate: targetDate
+    })
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://localhost:8080/todos/add', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(payload);
 
     // Add the task to the task manager
-    todoController.addTodo(title, description, targetDate);
+//    todoController.addTodo(name, description, targetDate);
 });
