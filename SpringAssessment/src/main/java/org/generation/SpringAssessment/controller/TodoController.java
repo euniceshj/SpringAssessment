@@ -4,7 +4,6 @@ import org.generation.SpringAssessment.controller.dto.TodoDto;
 import org.generation.SpringAssessment.repository.entity.Todos;
 import org.generation.SpringAssessment.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class TodoController {
         return todoService.all();
     }
 
-
+/*
     @CrossOrigin
     @PostMapping("/add")
     public void save
@@ -34,6 +33,20 @@ public class TodoController {
             TodoDto todoDto = new TodoDto(todo.getTitle(), todo.getDescription(), todo.getTargetDate());
             todoService.save(new Todos(todoDto));
     }
+]*/
+    @CrossOrigin
+    @PostMapping("/add")
+    public void save(  @RequestParam(name="title", required = true) String title,
+                       @RequestParam(name="description", required = true) String description,
+                       @RequestParam(name="targetDate", required = true) Date targetDate)throws IOException {
 
+        System.out.println(title);
+        System.out.println(description);
+        System.out.println(targetDate);
+
+
+        TodoDto todoDto = new TodoDto(title, description, targetDate);
+        todoService.save(new Todos(todoDto));
+    }
 
 }

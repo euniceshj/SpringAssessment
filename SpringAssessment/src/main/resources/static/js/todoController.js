@@ -15,16 +15,48 @@ class TodoController
     }
 
     //method to add the items into the array
-    addTodo(title, description, targetDate)
-    {
-        const todoObj = {
-            name: name,
-            description: description,
-            targetDate: targetDate
-        };
+//    addTodo(title, description, targetDate)
+//    {
+//        const todoObj = {
+//            name: name,
+//            description: description,
+//            targetDate: targetDate
+//        };
+//
+//        this._items.push(todoObj);
+//    }
 
-        this._items.push(todoObj);
-    }
+     //method to add the items into the database
+            addTodo(title, description, targetDate)
+            {
+                let productController = this;
+                const formData = new FormData();
+                formData.append('title', title);
+                formData.append('description', description);
+                formData.append('targetDate', targetDate);
+
+               fetch('http://localhost:8080/todos/add', {
+                     method: 'POST',
+                     body: formData
+                     })
+                     .then(function(response) {
+                         console.log(response.status); // Will show you the status
+                         if (response.ok) {
+                             alert("Successfully Added To-do!");
+                         }
+                         else {
+                            throw Error(response.statusText);
+                         }
+                     })
+                     .catch((error) => {
+                         console.error('Error:', error);
+                         alert("Error adding to-do")
+                     });
+            }
+
+
+
+
 
     //This method will do the fetch method to fetch data from database using the REST API endpoint from SpringBoot
     displayItem()
