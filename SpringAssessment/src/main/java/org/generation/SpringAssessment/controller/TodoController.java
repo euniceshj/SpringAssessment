@@ -25,15 +25,6 @@ public class TodoController {
         return todoService.all();
     }
 
-/*
-    @CrossOrigin
-    @PostMapping("/add")
-    public void save
-            (@RequestBody Todos todo) throws IOException {
-            TodoDto todoDto = new TodoDto(todo.getTitle(), todo.getDescription(), todo.getTargetDate());
-            todoService.save(new Todos(todoDto));
-    }
-]*/
     @CrossOrigin
     @PostMapping("/add")
     public void save(  @RequestParam(name="title", required = true) String title,
